@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SOCKET_IO_CLIENT from 'socket.io-client'
 import { 
   Responsive,
-  Grid,
   Container
 } from 'semantic-ui-react'
 
@@ -26,11 +25,7 @@ class App extends Component {
     return (
       <Responsive>
         <Container>
-          <Grid>
-            <Grid.Row columns={1}>
-              <Forecast />
-            </Grid.Row>
-          </Grid>
+          <Forecast />
         </Container>
       </Responsive>
     );

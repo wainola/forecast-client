@@ -1,28 +1,59 @@
 import React, { Component } from 'react'
-import { Segment, Card, Button, Icon, Image } from 'semantic-ui-react'
+import { Grid, Segment, Header } from 'semantic-ui-react'
 
 export class Forecast extends Component {
   render() {
     return (
-      <div>
-        <Segment basic>
-          <Card>
-          <Image src='/images/avatar/large/matthew.png' />
-          <Card.Content>
-            <Card.Header>Matthew</Card.Header>
-            <Card.Meta>
-              <span className='date'>Joined in 2015</span>
-            </Card.Meta>
-            <Card.Description>Matthew is a musician living in Nashville.</Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <a>
-              <Icon name='user' />
-              22 Friends
-            </a>
-          </Card.Content>
-        </Card>
-        </Segment>
+      <div style={{marginTop: '5rem'}}>
+        <Grid stackable verticalAlign='middle'>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              <Header as='h1' textAlign='center'>Time and Temprature</Header>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <Grid centered textAlign='center' stackable verticalAlign='middle'>
+          <Grid.Row columns={3}>
+            <Grid.Column>
+              <Segment raised>
+              CL
+              </Segment>
+            </Grid.Column>
+
+            <Grid.Column>
+              <Segment raised>
+              CH
+              </Segment>
+            </Grid.Column>
+
+            <Grid.Column>
+              <Segment raised>
+              NZ
+              </Segment>
+            </Grid.Column>
+
+          </Grid.Row>
+          <Grid.Row columns={3}>
+            <Grid.Column>
+              <Segment raised>
+              AU
+              </Segment>
+            </Grid.Column>
+
+            <Grid.Column>
+              <Segment raised>
+              UK
+              </Segment>
+            </Grid.Column>
+
+            <Grid.Column>
+              <Segment raised>
+              USA
+              </Segment>
+            </Grid.Column>
+
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }
