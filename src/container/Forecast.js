@@ -1,7 +1,21 @@
 import React, { Component } from 'react'
 import { Grid, Segment, Header } from 'semantic-ui-react'
+import SOCKET_IO_CLIENT from 'socket.io-client'
 
 export class Forecast extends Component {
+  constructor(){
+    super()
+    this.state = {
+      endpoint: 'http://127.0.0.1:9000'
+    }
+  }
+  componentWillMount(){
+    const { endpoint } = this.state
+    const socket = SOCKET_IO_CLIENT(endpoint)
+    socket.on('FROM_API', data => {
+      console.log('data from api', data)
+    })
+  }
   render() {
     return (
       <div style={{marginTop: '5rem'}}>
