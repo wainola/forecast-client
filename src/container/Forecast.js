@@ -21,6 +21,7 @@ export class Forecast extends Component {
     const { endpoint } = this.state
     const socket = SOCKET_IO_CLIENT(endpoint)
     socket.on('FROM_API', data => {
+      console.log('data', data)
       this.setState({
         ...this.state,
         santiago: { time: moment().tz(data[0].timezone).format('LTS'), temp: data[0].currently.temperature },
@@ -41,7 +42,7 @@ export class Forecast extends Component {
         <Grid stackable verticalAlign='middle'>
           <Grid.Row columns={1}>
             <Grid.Column>
-              <Header as='h1' textAlign='center'>Time and Temprature</Header>
+              <Header as='h1' textAlign='center'>Time and Temperature</Header>
             </Grid.Column>
           </Grid.Row>
         </Grid>
