@@ -2,13 +2,19 @@ import React, { Component } from 'react'
 import { Grid, Segment, Header, Message, Icon } from 'semantic-ui-react'
 import SOCKET_IO_CLIENT from 'socket.io-client'
 import moment from 'moment'
+import tz from 'moment-timezone'
 
 export class Forecast extends Component {
   constructor(){
     super()
     this.state = {
       endpoint: 'http://127.0.0.1:9000',
-      data_locations: []
+      santiago: undefined,
+      zurich: undefined,
+      auckland: undefined,
+      sydney: undefined,
+      london: undefined,
+      georgia: undefined
     }
   }
   componentWillMount(){
@@ -18,16 +24,19 @@ export class Forecast extends Component {
       console.log('data from api', data)
       this.setState({
         ...this.state,
-        data_locations: data
+        santiago: { time: moment().tz(data[0].timezone).format('LTS'), temp: data[0].currently.temperature },
+        zurich: { time: moment().tz(data[1].timezone).format('LTS'), temp: data[1].currently.temperature },
+        auckland: { time: moment().tz(data[2].timezone).format('LTS'), temp: data[2].currently.temperature },
+        sydney: { time: moment().tz(data[3].timezone).format('LTS'), temp: data[3].currently.temperature },
+        london: { time: moment().tz(data[4].timezone).format('LTS'), temp: data[4].currently.temperature },
+        georgia: { time: moment().tz(data[5].timezone).format('LTS'), temp: data[5].currently.temperature }
       })
     })
   }
   render() {
-    const { data_locations } = this.state
+    const { santiago, zurich, auckland, sydney, london, georgia } = this.state
     console.log(moment.unix(1534720515).format('LLL'))
-    if(data_locations.length !== 0){
-      console.log('hora: ', moment.unix(data_locations[0].currently.time).format('LLL'))
-    }
+    console.log(moment().tz('Europe/London').format('LLL'))
     return (
       <div style={{marginTop: '5rem'}}>
         <Grid stackable verticalAlign='middle'>
@@ -41,17 +50,20 @@ export class Forecast extends Component {
           <Grid.Row columns={3}>
             <Grid.Column>
               <Segment raised>
-                { data_locations.length !== 0 ? 
+                { santiago !== undefined ? 
                   <Message>
-                    Time: { data_locations.length !== 0 ? moment.unix(data_locations[0].currently.time).format('LLL') : ''}
-                    <br/>
-                    Temperature
+                    <Message.Header>Santiago</Message.Header>
+                    <Message.Content>
+                      Time: { santiago.time }
+                      <br/>
+                      Temperature { santiago.temp } Celsius
+                    </Message.Content>
                   </Message>
                   :
                   <Message icon>
                     <Icon name='circle notched' loading />
                     <Message.Content>
-                      Fetching data!
+                      Fetching data for Santiago!
                     </Message.Content>
                   </Message>
                 }
@@ -60,13 +72,45 @@ export class Forecast extends Component {
 
             <Grid.Column>
               <Segment raised>
-              CH
+                { zurich !== undefined ? 
+                  <Message>
+                    <Message.Header>Zurich</Message.Header>
+                    <Message.Content>
+                      Time: { zurich.time }
+                      <br/>
+                      Temperature: { zurich.temp } Celsius
+                    </Message.Content>
+                  </Message>
+                  :
+                  <Message icon>
+                    <Icon name='circle notched' loading />
+                    <Message.Content>
+                      Fetching data for Zurich!
+                    </Message.Content>
+                  </Message>
+                }
               </Segment>
             </Grid.Column>
 
             <Grid.Column>
               <Segment raised>
-              NZ
+              { auckland !== undefined ? 
+                  <Message>
+                    <Message.Header>Auckland</Message.Header>
+                    <Message.Content>
+                      Time: { auckland.time }
+                      <br/>
+                      Temperature: { auckland.temp } Celsius
+                    </Message.Content>
+                  </Message>
+                  :
+                  <Message icon>
+                    <Icon name='circle notched' loading />
+                    <Message.Content>
+                      Fetching data for Auckland!
+                    </Message.Content>
+                  </Message>
+                }
               </Segment>
             </Grid.Column>
 
@@ -74,19 +118,67 @@ export class Forecast extends Component {
           <Grid.Row columns={3}>
             <Grid.Column>
               <Segment raised>
-              AU
+                { sydney !== undefined ? 
+                  <Message>
+                    <Message.Header>Sydney</Message.Header>
+                    <Message.Content>
+                      Time: { sydney.time }
+                      <br/>
+                      Temperature: { sydney.temp } Celsius
+                    </Message.Content>
+                  </Message>
+                  :
+                  <Message icon>
+                    <Icon name='circle notched' loading />
+                    <Message.Content>
+                      Fetching data for Sydney!
+                    </Message.Content>
+                  </Message>
+                }
               </Segment>
             </Grid.Column>
 
             <Grid.Column>
               <Segment raised>
-              UK
+                { london !== undefined ? 
+                  <Message>
+                    <Message.Header>London</Message.Header>
+                    <Message.Content>
+                      Time: { london.time }
+                      <br/>
+                      Temperature: { london.temp } Celsius
+                    </Message.Content>
+                  </Message>
+                  :
+                  <Message icon>
+                    <Icon name='circle notched' loading />
+                    <Message.Content>
+                      Fetching data for London!
+                    </Message.Content>
+                  </Message>
+                }
               </Segment>
             </Grid.Column>
 
             <Grid.Column>
               <Segment raised>
-              USA
+              { georgia !== undefined ? 
+                  <Message>
+                    <Message.Header>Georgia</Message.Header>
+                    <Message.Content>
+                      Time: { georgia.time }
+                      <br/>
+                      Temperature: { georgia.temp } Celsius
+                    </Message.Content>
+                  </Message>
+                  :
+                  <Message icon>
+                    <Icon name='circle notched' loading />
+                    <Message.Content>
+                      Fetching data for Georgia!
+                    </Message.Content>
+                  </Message>
+                }
               </Segment>
             </Grid.Column>
 
