@@ -8,7 +8,7 @@ export class Forecast extends Component {
   constructor(){
     super()
     this.state = {
-      endpoint: 'https://tz-acid-challenge.herokuapp.com/',
+      endpoint: 'http://127.0.0.1:9003',
       santiago: undefined,
       zurich: undefined,
       auckland: undefined,
