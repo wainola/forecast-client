@@ -21,7 +21,6 @@ export class Forecast extends Component {
     const { endpoint } = this.state
     const socket = SOCKET_IO_CLIENT(endpoint)
     socket.on('FROM_API', data => {
-      console.log('data', data)
       this.setState({
         ...this.state,
         santiago: { time: moment().tz(data[0].timezone).format('LTS'), temp: data[0].currently.temperature },
@@ -35,8 +34,6 @@ export class Forecast extends Component {
   }
   render() {
     const { santiago, zurich, auckland, sydney, london, georgia } = this.state
-    console.log(moment.unix(1534720515).format('LLL'))
-    console.log(moment().tz('Europe/London').format('LLL'))
     return (
       <div style={{marginTop: '5rem'}}>
         <Grid stackable verticalAlign='middle'>
